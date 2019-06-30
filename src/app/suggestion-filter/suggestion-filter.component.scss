@@ -1,0 +1,12 @@
+.cards {
+    height: 100%;
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+mat-card-footer {  
+    padding: 16px;
+}

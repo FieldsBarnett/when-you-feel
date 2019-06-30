@@ -1,0 +1,31 @@
+<div class="cards">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="mat-display-2">How do you feel?</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-chip-list>
+        <mat-chip *ngFor="let feeling of unselectedFeelings"
+        (click)="select(feeling)"
+        [ngClass]="'feeling-color-' + feeling.color">{{feeling.name + feeling.emoji}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-card-footer class="mat-elevation-z1">
+      <mat-chip-list (change)="chipSelectionChanges">
+          <mat-chip *ngFor="let feeling of selectedFeelings"
+          [removable]="true"
+          (click)="deselect(feeling)"
+          (removed)="deselect(feeling)"
+          [ngClass]="'feeling-color-' + feeling.color"> {{feeling.name + feeling.emoji}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-footer>
+  </mat-card>
+  
+  <mat-accordion class="suggestions">
+      <app-suggestion *ngFor="let suggestion of suggestions"
+      [suggestion]="suggestion"></app-suggestion>
+  </mat-accordion>
+</div>

@@ -1,0 +1,20 @@
+mat-toolbar.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 64px;
+  padding: 0 10%;
+}
+
+.header span {
+  flex: auto;
+}
+
+.header h1{
+  font-size: 2em;
+}
+
+.nav-links button {
+  width: 10vw;
+  margin: 10px;
+}

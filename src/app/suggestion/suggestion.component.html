@@ -1,0 +1,19 @@
+<mat-expansion-panel>
+
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{title}}</mat-panel-title>
+    <mat-panel-description>
+      <mat-chip-list>
+        <mat-chip *ngFor="let feeling of feelings"
+        disableRipple="true"
+        [ngClass]="'feeling-color-' + feeling.color">{{feeling.name + feeling.emoji}}</mat-chip>
+      </mat-chip-list>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <p>{{description}}</p>
+  <mat-horizontal-stepper>
+    <mat-step *ngFor="let step of steps; let i = index;" [completed]="false">{{step}}</mat-step>
+  </mat-horizontal-stepper>
+  
+</mat-expansion-panel>

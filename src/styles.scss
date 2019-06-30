@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.mat-step-header .mat-step-icon {
+    background-color: #ff4081; 
+ }
+
+.mat-step-header .mat-step-icon-selected {
+    background-color: #ff0056; 
+ }
+
+// Feeling Chip Colors
+.feeling-color-gold {
+    background-color: gold !important;
+}
+.feeling-color-dodgerblue {
+    background-color: dodgerblue !important;
+}
+.feeling-color-gray, .feeling-color-grey {
+    background-color: gray !important;
+}
