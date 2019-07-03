@@ -25,7 +25,7 @@
   </mat-card>
   
   <mat-accordion class="suggestions">
-      <app-suggestion *ngFor="let suggestion of suggestions"
+      <app-suggestion *ngFor="let suggestion of suggestions$ | async"
       [suggestion]="suggestion"></app-suggestion>
   </mat-accordion>
 </div>

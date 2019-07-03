@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export class Feeling {
   name: string;
@@ -19,6 +20,8 @@ export class Suggestion {
 })
 export class HttpService {
 
+  suggestions$ = new Observable<Suggestion[]>();
+
   constructor(private httpClient: HttpClient) { }
 
   getSuggestions(): Suggestion[] {
@@ -34,6 +37,15 @@ export class HttpService {
               'Wisk 80 eggs and place them into the oven until they are ready.',
               'Enjoy your yummy cake!']},
     ]
+  }
+
+  getFilteredSuggestions(filters: string[]): Observable<Suggestion[]> {
+    const suggestions$ = new Observable<Suggestion[]>(observer => observer.next(this.getSuggestions().filter(suggestion => {
+      let matchesAnyFilter = false; 
+      suggestion.feelings.forEach(feeling => { if (filters.includes(feeling.name)) matchesAnyFilter = true; });
+      return matchesAnyFilter;
+    })));
+    return suggestions$;
   }
 
   getFeelings(): Feeling[] {
