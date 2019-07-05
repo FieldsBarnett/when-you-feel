@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>Add your own activity!</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <input matInput placeholder="Suggestion Name">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Short Description"></textarea>
+      </mat-form-field>
+      
+      <mat-form-field *ngFor="let step of steps">
+        <input matInput placeholder="Step {{step}}">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="submit">Submit</button>
+    <button mat-flat-button *ngIf="steps.length < 5"(click)="addStep()">Add Step</button>
+    <button mat-flat-button *ngIf="steps.length > 0" (click)="removeStep()">Remove Step</button>
+  </mat-card-actions>
+</mat-card>

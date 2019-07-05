@@ -56,11 +56,3 @@ export class HttpService {
     ]
   }
 }
-
-// title: string = 'Make a cake!';
-// feelings: Feeling;
-// description: string = `This is a delicious cake that is sure to cheer you up! Take your time and enjoy making it.`;
-// steps: string[] = [
-//   'Set oven to 500 degrees and get out 80 eggs',
-//   'Wisk 80 eggs and place them into the oven until they are ready.',
-//   'Enjoy your yummy cake!'

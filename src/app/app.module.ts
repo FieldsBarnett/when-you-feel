@@ -18,6 +18,8 @@ import { SuggestionFilterComponent } from './suggestion-filter/suggestion-filter
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
+import { SuggestionEditorComponent } from './suggestion-editor/suggestion-editor.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     NavComponent,
     SidebarComponent,
     SuggestionFilterComponent,
+    SuggestionEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatFormFieldModule,
     HttpClientModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

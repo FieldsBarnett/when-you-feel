@@ -12,7 +12,7 @@
       </mat-chip-list>
     </mat-card-content>
     <mat-card-footer class="mat-elevation-z1">
-      <mat-chip-list (change)="chipSelectionChanges">
+      <mat-chip-list>
           <mat-chip *ngFor="let feeling of selectedFeelings"
           [removable]="true"
           (click)="deselect(feeling)"
