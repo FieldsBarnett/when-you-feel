@@ -20,6 +20,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { SuggestionEditorComponent } from './suggestion-editor/suggestion-editor.component';
 import {MatInputModule} from '@angular/material/input';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +34,7 @@ import {MatInputModule} from '@angular/material/input';
     SidebarComponent,
     SuggestionFilterComponent,
     SuggestionEditorComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,8 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     HttpClientModule,
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

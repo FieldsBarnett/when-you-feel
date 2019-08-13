@@ -1,6 +1,6 @@
 <mat-card>
-  <mat-card-title>Add your own activity!</mat-card-title>
   <mat-card-content>
+    <mat-card-title>Add your own activity!</mat-card-title>
     <form>
       <mat-form-field>
         <input matInput placeholder="Suggestion Name">
@@ -12,11 +12,19 @@
       <mat-form-field *ngFor="let step of steps">
         <input matInput placeholder="Step {{step}}">
       </mat-form-field>
+      <div class="stepButtonContainer">
+        <button type="button" mat-raised-button [disabled]="steps.length >= 5" (click)="addStep()" routerLinkActive="false">Add Step</button>
+        <button type="button" mat-raised-button [disabled]="steps.length < 1" (click)="removeStep()">Remove Step</button>
+      </div>
+      <label>Do this when you feel...</label>
+      <mat-chip-list>
+        <mat-chip *ngFor="let feeling of feelings$ | async"
+        [disableRipple]="true"
+        (click)="toggleSelected(feeling)"
+        [class]="'feeling-color-' + feeling.color"
+        [ngClass]="{'unselectedFeeling': !selectedFeelings.includes(feeling)}">{{feeling.name + feeling.emoji}}</mat-chip>
+      </mat-chip-list>
+      <button mat-raised-button color="accent" style="width: 100%">Submit</button>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button class="submit">Submit</button>
-    <button mat-flat-button *ngIf="steps.length < 5"(click)="addStep()">Add Step</button>
-    <button mat-flat-button *ngIf="steps.length > 0" (click)="removeStep()">Remove Step</button>
-  </mat-card-actions>
 </mat-card>

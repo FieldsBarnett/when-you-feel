@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService, Feeling } from '../services/http-service.service';
 
 @Component({
   selector: 'app-suggestion-editor',
@@ -9,17 +10,30 @@ export class SuggestionEditorComponent implements OnInit {
 
   steps: number[] = [];
   private numberOfSteps = 0;
+  public feelings$;
+  public selectedFeelings: Feeling[] = [];
+  public unselectedFeelings: Feeling[];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.feelings$ = this.httpService.getFeelings();
   }
+
+  toggleSelected(feeling: Feeling) {
+    if (this.selectedFeelings.includes(feeling)) {
+      this.selectedFeelings = this.selectedFeelings.filter(item => item != feeling);
+    } else {
+      this.selectedFeelings.push(feeling);
+    }
+  }
+  
 
   addStep() {
     this.numberOfSteps++;
     this.steps.push(this.numberOfSteps);
-    console.log(this.steps);
   }
+
 
   removeStep() {
     this.numberOfSteps--;

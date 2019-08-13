@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Suggestion, Feeling } from '../http-service.service';
+import { Suggestion, Feeling } from '../services/http-service.service';
 
 @Component({
   selector: 'app-suggestion',

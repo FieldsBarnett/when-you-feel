@@ -10,8 +10,6 @@
   <h1 class="mat-display-4">When You Feel...</h1>
   <span style="visibility: hidden"></span>
   <div class="nav-links">
-    <button mat-flat-button color="accent">These don't</button>
-    <button mat-flat-button color="accent">do anything</button>
-    <button mat-flat-button color="accent">quite yet</button>
+    <button mat-flat-button *ngIf="!!authService.user" (click)="authService.signOut()" color="accent">Sign Out</button>
   </div>
 </mat-toolbar>

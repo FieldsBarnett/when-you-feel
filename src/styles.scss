@@ -12,6 +12,7 @@ html, body {
 
 body {
     margin: 0;
+    background-color: gainsboro;
 }
 
 .mat-step-header .mat-step-icon {
@@ -23,12 +24,16 @@ body {
  }
 
 // Feeling Chip Colors
-.feeling-color-gold {
+.feeling-color-gold{
     background-color: gold !important;
 }
-.feeling-color-dodgerblue {
+.feeling-color-dodgerblue{
     background-color: dodgerblue !important;
 }
-.feeling-color-gray, .feeling-color-grey {
+.feeling-color-gray, .feeling-color-grey{
     background-color: gray !important;
+}
+
+html body .mat-standard-chip:hover::after, html body .mat-chip.mat-standard-chip::after {
+    opacity: 0 !important;
 }

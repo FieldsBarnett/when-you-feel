@@ -3,7 +3,8 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <app-suggestion-editor></app-suggestion-editor>
+    <app-login *ngIf="!authService.user"></app-login>
+    <app-suggestion-editor *ngIf="!!authService.user"></app-suggestion-editor>
   </mat-sidenav>
   <mat-sidenav-content>
     <ng-content></ng-content>

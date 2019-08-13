@@ -1,3 +1,30 @@
 mat-form-field {
     width: 100%;
 }
+
+mat-card-content form {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.stepButtonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-chip-list {
+    margin-bottom: 16px;
+}
+
+label {
+    margin: 12px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.unselectedFeeling {
+    background: darkgrey !important;
+}

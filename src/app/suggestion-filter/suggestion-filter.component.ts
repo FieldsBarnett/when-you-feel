@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { HttpService, Feeling } from '../http-service.service';
-import { Suggestion } from '../http-service.service';
+import { HttpService, Feeling } from '../services/http-service.service';
+import { Suggestion } from '../services/http-service.service';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, last, map, mergeMap } from 'rxjs/operators';
 
@@ -24,9 +24,7 @@ export class SuggestionFilterComponent implements OnInit {
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.unselectedFeelings = this.httpService.getFeelings();
-
-
+    this.httpService.getFeelings().subscribe(feelings => this.unselectedFeelings = feelings);
   }
 
   deselect(feeling) {

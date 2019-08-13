@@ -1,0 +1,15 @@
+<mat-card class="container">
+  <h2 class="center">Login to submit your own ideas!</h2>
+  <mat-form-field class="center">
+      <input matInput placeholder="Email" [(value)]="email">
+    </mat-form-field>
+    <mat-form-field class="center">
+      <input matInput placeholder="Password" [(value)]="password">
+    </mat-form-field>
+    <div class="center" style="display: flex;">
+      <button mat-raised-button (click)="authService.emailSignIn(email, password)" color="accent" style="margin-right: 10px;">Login</button>
+      <button mat-raised-button (click)="authService.emailSignUp(email, password)" color="accent">Register</button>
+    </div>
+  <div class="center">or</div>
+  <img src="../../assets/btn_google_signin_light_normal_web.png" (click)="login()" class="google-signin center">
+</mat-card>

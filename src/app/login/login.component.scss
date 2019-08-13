@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: middle;
+    margin: 40px;
+}
+
+.google-signin {
+    max-width: 191px;
+    max-height: 46px;
+    cursor: pointer;
+}
+
+.center {
+    margin: 10px auto;
+}

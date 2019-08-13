@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 export class Feeling {
   name: string;
@@ -48,11 +48,10 @@ export class HttpService {
     return suggestions$;
   }
 
-  getFeelings(): Feeling[] {
-    return [
+  getFeelings(): Observable<Feeling[]> {
+    return of([
       {name: 'Happy', color: 'gold', emoji: '😃'},
       {name: 'Sad', color: 'dodgerblue', emoji: '😢'},
-      {name: 'Helpless', color: 'gray', emoji: '😔'},
-    ]
+      {name: 'Helpless', color: 'gray', emoji: '😔'}]);
   }
 }
