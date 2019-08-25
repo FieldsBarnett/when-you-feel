@@ -1,30 +1,30 @@
 <mat-card>
   <mat-card-content>
     <mat-card-title>Add your own activity!</mat-card-title>
-    <form>
       <mat-form-field>
-        <input matInput placeholder="Suggestion Name">
+        <input matInput [(ngModel)]="newSuggestion.title" placeholder="Suggestion Name">
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput placeholder="Short Description"></textarea>
+        <textarea matInput [(ngModel)]="newSuggestion.description" placeholder="Short Description"></textarea>
       </mat-form-field>
       
-      <mat-form-field *ngFor="let step of steps">
-        <input matInput placeholder="Step {{step}}">
+      <mat-form-field *ngFor="let step of newSuggestion.steps; index as i; trackBy:trackByFn">
+        <input matInput [(ngModel)]="newSuggestion.steps[i]" placeholder="Step {{i+1}}">
       </mat-form-field>
       <div class="stepButtonContainer">
-        <button type="button" mat-raised-button [disabled]="steps.length >= 5" (click)="addStep()" routerLinkActive="false">Add Step</button>
-        <button type="button" mat-raised-button [disabled]="steps.length < 1" (click)="removeStep()">Remove Step</button>
+        <button type="button" mat-raised-button [disabled]="newSuggestion.steps.length >= 5" (click)="addStep()" routerLinkActive="false">Add Step</button>
+        <button type="button" mat-raised-button [disabled]="newSuggestion.steps.length < 1" (click)="removeStep()">Remove Step</button>
       </div>
+
       <label>Do this when you feel...</label>
       <mat-chip-list>
         <mat-chip *ngFor="let feeling of feelings$ | async"
         [disableRipple]="true"
         (click)="toggleSelected(feeling)"
         [class]="'feeling-color-' + feeling.color"
-        [ngClass]="{'unselectedFeeling': !selectedFeelings.includes(feeling)}">{{feeling.name + feeling.emoji}}</mat-chip>
+        [ngClass]="{'unselectedFeeling': !newSuggestion.feelings.includes(feeling)}">{{feeling.name + feeling.emoji}}</mat-chip>
       </mat-chip-list>
-      <button mat-raised-button color="accent" style="width: 100%">Submit</button>
-    </form>
+
+    <button mat-raised-button color="accent" (click)="submitSuggestion()" style="width: 100%">Submit</button>      
   </mat-card-content>
 </mat-card>

@@ -24,6 +24,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './login/login.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms'
 
 
 @NgModule({
@@ -41,7 +43,7 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    FormsModule,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
@@ -57,6 +59,7 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

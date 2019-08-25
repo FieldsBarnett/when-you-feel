@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService, Feeling } from '../services/http-service.service';
+import { HttpService, Feeling, Suggestion } from '../services/http-service.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-suggestion-editor',
@@ -8,36 +9,45 @@ import { HttpService, Feeling } from '../services/http-service.service';
 })
 export class SuggestionEditorComponent implements OnInit {
 
-  steps: number[] = [];
-  private numberOfSteps = 0;
+  newSuggestion = new Suggestion();
+
   public feelings$;
-  public selectedFeelings: Feeling[] = [];
-  public unselectedFeelings: Feeling[];
 
-  constructor(private httpService: HttpService) { }
-
+  constructor(
+    private httpService: HttpService,
+    private authService: AuthService) { }
+ 
   ngOnInit() {
     this.feelings$ = this.httpService.getFeelings();
   }
 
   toggleSelected(feeling: Feeling) {
-    if (this.selectedFeelings.includes(feeling)) {
-      this.selectedFeelings = this.selectedFeelings.filter(item => item != feeling);
+    if (this.newSuggestion.feelings.includes(feeling)) {
+      this.newSuggestion.feelings = this.newSuggestion.feelings.filter(item => item != feeling);
     } else {
-      this.selectedFeelings.push(feeling);
+      this.newSuggestion.feelings.push(feeling);
     }
+    // this.httpService.getSuggestions();
   }
+
+  trackByFn(index: any, item: any) {
+    return index;
+ }
   
 
   addStep() {
-    this.numberOfSteps++;
-    this.steps.push(this.numberOfSteps);
+    this.newSuggestion.steps.push('');
   }
 
 
   removeStep() {
-    this.numberOfSteps--;
-    this.steps.pop();
+    this.newSuggestion.steps.pop();
+  }
+
+  submitSuggestion() {
+    this.httpService.createSuggestion(this.newSuggestion, this.authService.user)
+      .then(() => this.newSuggestion = new Suggestion())
+      .catch(error => console.error(error));
   }
 
 }

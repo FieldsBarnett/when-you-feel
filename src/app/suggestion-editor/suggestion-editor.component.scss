@@ -15,11 +15,14 @@ mat-card-content form {
 }
 
 mat-chip-list {
+    display: block;
     margin-bottom: 16px;
+    margin: 16px auto 16px, auto;
 }
 
 label {
-    margin: 12px;
+    display: block;
+    margin: 16px;
     text-align: center;
     font-size: 1.2em;
     font-weight: 500;

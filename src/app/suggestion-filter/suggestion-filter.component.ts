@@ -34,7 +34,7 @@ export class SuggestionFilterComponent implements OnInit {
     this.unselectedFeelings.push(feeling);
     this.unselectedFeelings.sort();
 
-    this.getSuggestions();
+    //this.getSuggestions();
   }
 
   select(feeling) {
@@ -42,14 +42,14 @@ export class SuggestionFilterComponent implements OnInit {
     this.unselectedFeelings.splice((this.unselectedFeelings.indexOf(feeling)), 1);
 
     this.selectedFeelings.push(feeling);
-    this.getSuggestions();
+    //this.getSuggestions();
   }
 
-  getSuggestions() {
-    this.filters$.next(this.selectedFeelings);
-    this.suggestions$ = this.filters$.pipe(
-      debounceTime(500),
-      switchMap(feelings => this.httpService.getFilteredSuggestions(feelings.map(feeling => feeling.name))))
-  }
+  // getSuggestions() {
+  //   this.filters$.next(this.selectedFeelings);
+  //   this.suggestions$ = this.filters$.pipe(
+  //     debounceTime(500),
+  //     switchMap(feelings => this.httpService.getFilteredSuggestions(feelings.map(feeling => feeling.name))))
+  // }
 
 }
