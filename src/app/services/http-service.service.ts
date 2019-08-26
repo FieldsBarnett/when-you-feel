@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { User, database } from 'firebase';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { Promise } from 'q';
-import { map, merge } from 'rxjs/operators';
+import { map, merge, distinct } from 'rxjs/operators';
 
 export class Feeling {
   name: string;
@@ -51,13 +51,13 @@ export class HttpService {
       this.firestore
         .collection("suggestions")
         .add(data)
-        .then(success => resolve, error => reject(error));
+        .then(res => resolve(undefined), error => reject(error));
     });
   }
 
 
   getSuggestions(): Observable<Suggestion[]> {
-    return this.firestore.collection('suggestions').get()
+    return this.firestore.collection('suggestions', ref => ref.limit(50)).get()
       .pipe(
         map(snapshot => {
           const suggestions = [];
@@ -79,7 +79,7 @@ export class HttpService {
     // Query for each selected feeling and map to suggestions
     feelings.forEach(feeling => {
       results.push(
-        this.firestore.collection('suggestions', ref => ref.where('feelings', 'array-contains', feeling)).get()
+        this.firestore.collection('suggestions', ref => ref.where('feelings', 'array-contains', feeling).limit(20)).get()
           .pipe(
             map(snapshot => {
                 const suggestions = [];
@@ -93,6 +93,7 @@ export class HttpService {
     // Combine results into one observable
     return new Observable().pipe(
       merge(...results),
+      distinct(),
     )
   }
 
