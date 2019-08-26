@@ -27,7 +27,6 @@ export class SuggestionEditorComponent implements OnInit {
     } else {
       this.newSuggestion.feelings.push(feeling);
     }
-    // this.httpService.getSuggestions();
   }
 
   trackByFn(index: any, item: any) {

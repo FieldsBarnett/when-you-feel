@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { User } from 'firebase';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { User, database } from 'firebase';
+import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { Promise } from 'q';
+import { map, merge } from 'rxjs/operators';
 
 export class Feeling {
   name: string;
@@ -55,20 +56,45 @@ export class HttpService {
   }
 
 
-  // getSuggestions() {
-  //   return this.firestore.collection('suggestions').snapshotChanges()
-  //     .subscribe(thing => console.log(thing));
-  // }
+  getSuggestions(): Observable<Suggestion[]> {
+    return this.firestore.collection('suggestions').get()
+      .pipe(
+        map(snapshot => {
+          const suggestions = [];
+          snapshot.forEach(doc => suggestions.push(<Suggestion> doc.data()));
+          return suggestions;
+        })
+      );
+  }
 
 
-  // getFilteredSuggestions(filters: string[]): Observable<Suggestion[]> {
-  //   const suggestions$ = new Observable<Suggestion[]>(observer => observer.next(this.getSuggestions().filter(suggestion => {
-  //     let matchesAnyFilter = false; 
-  //     suggestion.feelings.forEach(feeling => { if (filters.includes(feeling.name)) matchesAnyFilter = true; });
-  //     return matchesAnyFilter;
-  //   })));
-  //   return suggestions$;
-  // }
+  getFilteredSuggestions(feelings: Feeling[]): Observable<any[]> {
+    if (feelings.length == 0) {
+      return new Observable<any>();
+    }
+
+    // Holds result from each query
+    const results: Observable<any>[] = [];
+
+    // Query for each selected feeling and map to suggestions
+    feelings.forEach(feeling => {
+      results.push(
+        this.firestore.collection('suggestions', ref => ref.where('feelings', 'array-contains', feeling)).get()
+          .pipe(
+            map(snapshot => {
+                const suggestions = [];
+                snapshot.docs.forEach(doc => suggestions.push(doc.data()));
+                return suggestions;
+            }),
+          )
+      );
+    });
+
+    // Combine results into one observable
+    return new Observable().pipe(
+      merge(...results),
+    )
+  }
 
   getFeelings(): Observable<Feeling[]> {
     return of([
